@@ -18,6 +18,16 @@ public class PageDataResult {
 
     private List<?> list;
 
+
+
+
+
+
+
+
+
+
+
     public Integer getCode() {
         return code;
     }

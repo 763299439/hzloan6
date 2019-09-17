@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hz.manager.dao.BaseAdminCreditMapper">
+    <resultMap id="BaseResultMap" type="com.hz.manager.pojo.BaseAdminCredit">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="loan_id" jdbcType="INTEGER" property="loanID" />
+        <result column="loan_name" jdbcType="VARCHAR" property="loanName" />
+        <result column="loan_date_application" jdbcType="VARCHAR" property="loanApplicationDate" />
+        <result column="loan_phone" jdbcType="INTEGER" property="loanPhone" />
+        <result column="loan_quota" jdbcType="VARCHAR" property="loanQuota" />
+        <result column="loan_repayment" jdbcType="INTEGER" property="loanRepayment" />
+        <result column="loan_term" jdbcType="VARCHAR" property="loanTerm" />
+        <result column="loan_type" jdbcType="VARCHAR" property="loanType" />
+        <result column="loan_state" jdbcType="VARCHAR" property="loanState" />
+        <result column="loan_preliminary_date" jdbcType="VARCHAR" property="loanFirstTime" />
+        <result column="loan_preliminary_personnel" jdbcType="VARCHAR" property="loanFirstPersonnel" />
+    </resultMap>
+
+    <sql id="baseColumn">
+    loan_id,loan_name,loan_date_application,loan_phone,loan_quota,loan_repayment,loan_term,loan_type,loan_state,loan_preliminary_date,loan_preliminary_personnel
+  </sql>
+
+    <select id="getCreditList" resultMap="BaseResultMap">
+        SELECT <include refid="baseColumn"/>
+        FROM base_admin_loan
+        <where>
+            <if test="loanName != null and loanName != '' ">
+                and loan_name LIKE '%' #{loanName} '%'
+            </if>
+            <if test="loanPhone != null and loanPhone != '' ">
+                and loan_phone  LIKE '%' #{loanPhone} '%'
+            </if>
+            <if test="loanType != null and loanType != '' ">
+                and loan_type  LIKE '%' #{loanType} '%'
+            </if>
+            <if test="startTime != null and startTime != '' ">
+                and loan_date_application &gt;  #{startTime}
+            </if>
+            <if test="endTime != null and endTime != '' ">
+                and loan_date_application &lt;  #{endTime}
+            </if>
+        </where>
+    </select>
+
+</mapper>

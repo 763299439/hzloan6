@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:include="layout :: htmlhead" th:with="title='准入授信管理'"></head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--头-->
+    <div th:replace="fragments/head :: header"></div>
+
+    <div class="layui-body" style="margin: 1%">
+        <form id="userSearch" class="layui-form layui-form-pane" method="post" action="" style="margin-top: 20px;">
+
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">待初审</li>
+                    <li>已通过</li>
+                    <li>已终止</li>
+                </ul>
+                <div class="layui-tab-content" style="height: 100px;">
+                <span class="layui-breadcrumb">
+                      <a href="/home/">首页</a>
+                      <a href="/loan/creditManage/">贷前管理</a>
+                      <a><cite>准入授信管理</cite></a>
+                    </span>
+
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-inline">
+                                <input id="loanName" name="loanName" autocomplete="off" class="layui-input"
+                                       type="text"/>
+                            </div>
+                            <label class="layui-form-label">手机号</label>
+                            <div class="layui-input-inline">
+                                <input id="loanPhone" name="loanPhone" autocomplete="off" class="layui-input"
+                                       type="text" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                       onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+                            </div>
+                            <label class="layui-form-label">贷款类型</label>
+                            <div class="layui-input-inline">
+                                <select id="loanType" name="loanType">
+                                    <option >个人信用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">申请日期</label>
+                                <div class="layui-input-inline" style="width: 175px;">
+                                    <input name="startTime" id="startTime" placeholder="yyyy-MM-dd" autocomplete="off"
+                                           class="layui-input" type="text"/>
+                                </div>
+                                <div class="layui-form-mid">-</div>
+                                <div class="layui-input-inline" style="width: 175px;">
+                                    <input name="endTime" id="endTime" placeholder="yyyy-MM-dd" autocomplete="off"
+                                           class="layui-input" type="text"/>
+                                </div>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                <button class="layui-btn" lay-submit="" lay-filter="searchSubmit">查询</button>
+                            </div>
+                        </div>
+
+                        <!--<hr class="layui-bg-blue"/>-->
+                        <hr class="layui-bg-black"/>
+
+                        <div style="display:none;" id="currentUser">
+                            <shiro:principal property="id"></shiro:principal>
+                        </div>
+
+                        <table id="creditList" lay-filter="userTable"></table>
+
+                        <script type="text/html" id="optBar">
+                            <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+                        </script>
+                    </div>
+                    <div class="layui-tab-item">121</div>
+                    <div class="layui-tab-item">内容3</div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+
+    <!--底部-->
+    <div th:replace="fragments/footer :: footer"></div>
+    <script src="/js/dateUtils.js"></script>
+    <script src="/js/credit/credit.js"></script>
+
+</div>
+</body>
+</html>

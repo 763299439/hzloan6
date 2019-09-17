@@ -64,8 +64,7 @@ public class RoleController {
             // 获取角色列表
             pdr = adminRoleService.getRoleList(pageNum ,pageSize);
             logger.info("角色列表查询=pdr:" + pdr);
-
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
             logger.error("角色列表查询异常！", e);
         }
