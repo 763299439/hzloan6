@@ -60,7 +60,7 @@ public class LoanCreditController {
             }
             // 获取用户列表
             cr = loanCreditService.getCreditList(loanCreditDto, pageNum ,pageSize);
-            logger.info("用户列表查询=pdr:" + cr);
+            logger.info("该用户列表查询=pdr:" + cr);
 
         } catch (Exception e) {
             e.printStackTrace();
